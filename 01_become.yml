@@ -1,0 +1,10 @@
+---
+- name: Install httpd with become
+  hosts: copenhagen
+  become: true
+
+  tasks:
+    - name: Install httpd package
+      ansible.builtin.package:
+        name: httpd
+        state: present

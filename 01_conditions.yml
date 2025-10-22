@@ -1,0 +1,30 @@
+---
+- name: Conditions Playbook
+  hosts: copenhagen
+  gather_facts: true
+
+  vars:
+    run_boolean1: true
+    run_boolean2: false
+    run_string: "automation"
+
+  tasks:
+    - name: Boolean true condition
+      ansible.builtin.debug:
+        msg: "run_boolean1 was true"
+      when: run_boolean1
+
+    - name: Boolean false condition
+      ansible.builtin.debug:
+        msg: "run_boolean2 was true"
+      when: run_boolean2
+
+    - name: Boolean not true condition
+      ansible.builtin.debug:
+        msg: "run_boolean2 was false"
+      when: not run_boolean2
+
+    - name: String condition
+      ansible.builtin.debug:
+        msg: "run_string was automation"
+      when: run_string == "automation"
