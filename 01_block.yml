@@ -1,0 +1,22 @@
+---
+- name: Block Playbook
+  hosts: all
+  gather_facts: true
+
+  tasks:
+    - name: Task out of block
+      ansible.builtin.debug:
+        msg: "This is a task"
+
+    - name: Block
+      when: ansible_facts['distribution'] == 'RedHat'
+      vars:
+        color: blue
+      block:
+        - name: Task one in the block
+          ansible.builtin.debug:
+            msg: "The Color is {{ color }}"
+
+        - name: Task two in the block
+          ansible.builtin.debug:
+            msg: "The Color is still {{ color }}"
