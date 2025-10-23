@@ -20,3 +20,19 @@
         - name: Task two in the block
           ansible.builtin.debug:
             msg: "The Color is still {{ color }}"
+
+        - name: This task will fail # noqa no-changed-when
+          ansible.builtin.command: /bin/false
+
+        - name: This task will never run
+          ansible.builtin.debug:
+            msg: "If you see this something is wrong"
+      rescue:
+        - name: Here we can cleanup
+          ansible.builtin.debug:
+            msg: "Cleaning up !!"
+
+      always:
+        - name: Just run this
+          ansible.builtin.debug:
+            msg: "Will always run!"

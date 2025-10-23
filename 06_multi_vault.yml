@@ -1,0 +1,28 @@
+---
+- name: Development Environment
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vars/dev_secrets.yml
+
+  tasks:
+    - name: Show dev configuration
+      ansible.builtin.debug:
+        msg:
+          - "Environment: Development"
+          - "Database: {{ db_user }}@{{ db_host }}"
+          - "API: {{ api_endpoint }}"
+
+- name: Staging Environment
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vars/staging_secrets.yml
+
+  tasks:
+    - name: Show staging configuration
+      ansible.builtin.debug:
+        msg:
+          - "Environment: Staging"
+          - "Database: {{ db_user }}@{{ db_host }}"
+          - "API: {{ api_endpoint }}"

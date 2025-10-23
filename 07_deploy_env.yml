@@ -1,0 +1,22 @@
+---
+- name: Deploy Application
+  hosts: localhost
+  gather_facts: false
+  vars:
+    target_env: "{{ deploy_env | default('dev') }}"
+
+  tasks:
+    - name: Load environment secrets
+      ansible.builtin.include_vars:
+        file: "{{ target_env }}_secrets.yml"
+
+    - name: Show deployment info
+      ansible.builtin.debug:
+        msg:
+          - "Deploying to: {{ target_env | upper }}"
+          - "Database: {{ db_host }}"
+          - "API: {{ api_endpoint }}"
+
+    - name: Simulate deployment
+      ansible.builtin.debug:
+        msg: "Would deploy application to {{ target_env }} environment"

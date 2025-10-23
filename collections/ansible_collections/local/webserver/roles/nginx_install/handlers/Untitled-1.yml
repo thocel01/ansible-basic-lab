@@ -1,0 +1,8 @@
+---
+- hosts: copenhagen
+  become: yes
+
+  tasks:
+  - file:
+      path: /root/testfile.txt
+      state: touch
